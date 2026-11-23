@@ -1,0 +1,1669 @@
+{
+  "source": "http://www.gouldianfinches.eu/sk/geneticka-kalkulacka/russian/ (версия 1.1)",
+  "description": "Модель генетики амадина Гульда по онлайн-калькулятору gouldianfinches.eu",
+  "loci": {
+    "head_color": {
+      "name_ru": "Цвет головы (красный/чёрный)",
+      "inheritance": "sex_linked_z",
+      "alleles": {
+        "R": "красный (доминантный)",
+        "b": "чёрный (рецессивный)"
+      },
+      "note": "Самец ZZ (RR/Rb/bb), самка ZW (RY/bY). R > b."
+    },
+    "head_yellow": {
+      "name_ru": "Жёлтая голова",
+      "inheritance": "autosomal_recessive_epistatic",
+      "alleles": {
+        "i+": "жёлтая голова",
+        "i-": "дикий тип"
+      },
+      "form_codes": {
+        "i": "i+",
+        "o": "i-"
+      },
+      "note": "Проявляется только при ii (i+i+) И наличии аллеля R (рецессивный эпистаз). bb+ii = чёрноголовый, генетически жёлтоголовый (ЖКК / YTB)."
+    },
+    "breast": {
+      "name_ru": "Цвет груди",
+      "inheritance": "autosomal_multiple_alleles",
+      "alleles": {
+        "P": "фиолетовая",
+        "l": "розовая (lilac)",
+        "w": "белая"
+      },
+      "note": "Доминирование: P > l > w. PP/Pl/Pw = фиолетовая, ll/lw = розовая, ww = белая."
+    },
+    "body_yellow": {
+      "name_ru": "Цвет тела (зелёный/жёлтый)",
+      "inheritance": "sex_linked_z_incomplete_dominant",
+      "alleles": {
+        "G": "зелёный (дикий тип)",
+        "I": "жёлтый"
+      },
+      "note": "Самец: GG=зелёный, GI=жёлтый ОФ (один фактор, зелёный пастельный), II=жёлтый ДФ (два фактора, золотой). Самка: GY=зелёная, IY=жёлтая."
+    },
+    "body_blue": {
+      "name_ru": "Синее тело (разбавление)",
+      "inheritance": "autosomal_recessive",
+      "alleles": {
+        "m+": "синий",
+        "m-": "дикий тип"
+      },
+      "form_codes": {
+        "m": "m+",
+        "o": "m-"
+      },
+      "note": "mm: GGmm=синий, GImm=синий пастельный ОФ, IImm=серебристый ДФ. mo = носитель (щеп. синий), фенотип не меняется."
+    }
+  },
+  "form_options": {
+    "male_head": {
+      "RRoo": "красноголовый",
+      "Rboo": "красноголовый / чёрноголовый",
+      "RRio": "красноголовый / жёлтоголовый",
+      "Rbio": "красноголовый / чёрноголовый / жёлтоголовый",
+      "bboo": "чёрноголовый",
+      "bbii": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+      "bbio": "чёрноголовый / жёлтоголовый",
+      "RRii": "жёлтоголовый",
+      "Rbii": "жёлтоголовый / чёрноголовый"
+    },
+    "female_head": {
+      "RYoo": "красноголовая",
+      "RYio": "красноголовая / жёлтоголовая",
+      "RYii": "жёлтоголовая",
+      "bYoo": "чёрноголовая",
+      "bYii": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+      "bYio": "чёрноголовая / жёлтоголовая"
+    },
+    "breast": {
+      "PP": "фиолетовая",
+      "Pl": "фиолетовая / розовая",
+      "Pw": "фиолетовая / белая",
+      "ll": "розовая",
+      "lw": "розовая / белая",
+      "ww": "белая"
+    },
+    "male_body": {
+      "GGoo": "зелёный",
+      "GIoo": "жёлтый ОФ (зелёный пастельный)",
+      "IIoo": "жёлтый ДФ (золотой)",
+      "GGmm": "синий",
+      "GImm": "синий пастельный ОФ",
+      "IImm": "серебристый ДФ",
+      "GGmo": "зелёный /щеп. синий",
+      "GImo": "жёлтый (ОФ) /щеп. синий",
+      "IImo": "жёлтый ДФ (золотой) /щеп. синий"
+    },
+    "female_body": {
+      "GYoo": "зелёная",
+      "IYoo": "жёлтая",
+      "GYmm": "синяя",
+      "IYmm": "серебристая",
+      "GYmo": "зелёная /щеп. синяя",
+      "IYmo": "жёлтая /щеп. синяя"
+    },
+    "male_body_en": {
+      "GGoo": "Green",
+      "GIoo": "Yellow SF (Dilute)",
+      "IIoo": "Yellow DF",
+      "GGmm": "Blue",
+      "GImm": "Pastel Blue SF",
+      "IImm": "Silver DF",
+      "GGmo": "Green / split Blue",
+      "GImo": "Yellow SF (Dilute) / split Blue",
+      "IImo": "Yellow DF / split Blue"
+    },
+    "female_body_en": {
+      "GYoo": "Green",
+      "IYoo": "Yellow",
+      "GYmm": "Blue",
+      "IYmm": "Silver",
+      "GYmo": "Green / split Blue",
+      "IYmo": "Yellow / split Blue"
+    }
+  },
+  "images": [
+    {
+      "index": 0,
+      "file": "bbiillGGoo.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ll",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "розовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 1,
+      "file": "bbiillGIoo-SF.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 2,
+      "file": "bbiillGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 3,
+      "file": "bbiillIIoo-DF.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 4,
+      "file": "bbiillIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 5,
+      "file": "bbiiPPGGoo.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "PP",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 6,
+      "file": "bbiiPPGIoo-pastel.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "PP",
+      "body": "GIoo",
+      "suffix": "pastel",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 7,
+      "file": "bbiiPPIIoo-DF.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 8,
+      "file": "bbiiPPIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 9,
+      "file": "bbiiwwGGoo.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ww",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "белая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 10,
+      "file": "bbiiwwGIoo-SF.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 11,
+      "file": "bbiiwwGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 12,
+      "file": "bbiiwwIIoo-DF.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 13,
+      "file": "bbiiwwIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bbii",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый, ген. жёлтоголовый (ЖКК)",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 14,
+      "file": "bboollGGmm.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 15,
+      "file": "bboollGGoo.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 16,
+      "file": "bboollGIoo-SF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 17,
+      "file": "bboollGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 18,
+      "file": "bboollIImm-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 19,
+      "file": "bboollIIoo-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 20,
+      "file": "bboollIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 21,
+      "file": "bbooPPGGmm.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 22,
+      "file": "bbooPPGGoo.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 23,
+      "file": "bbooPPGImm.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "GImm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "синий пастельный ОФ"
+      }
+    },
+    {
+      "index": 24,
+      "file": "bbooPPGIoo-pastel.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "GIoo",
+      "suffix": "pastel",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 25,
+      "file": "bbooPPIImm-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 26,
+      "file": "bbooPPIIoo-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 27,
+      "file": "bbooPPIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 28,
+      "file": "bboowwGGmm.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 29,
+      "file": "bboowwGGoo.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 30,
+      "file": "bboowwGIoo-SF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 31,
+      "file": "bboowwGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 32,
+      "file": "bboowwIImm-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 33,
+      "file": "bboowwIIoo-DF.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 34,
+      "file": "bboowwIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "bboo",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "чёрноголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 35,
+      "file": "bYiillGYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "ll",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "розовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 36,
+      "file": "bYiillIYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "ll",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "розовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 37,
+      "file": "bYiiPPGYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "PP",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 38,
+      "file": "bYiiPPIYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 39,
+      "file": "bYiiPPIYoo-Z.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": "Z",
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 40,
+      "file": "bYiiwwGYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "ww",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "белая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 41,
+      "file": "bYiiwwIYoo.gif",
+      "sex": "female",
+      "head": "bYii",
+      "breast": "ww",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая, ген. жёлтоголовая (ЖКК)",
+        "breast": "белая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 42,
+      "file": "bYoollGYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ll",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "розовая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 43,
+      "file": "bYoollGYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ll",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "розовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 44,
+      "file": "bYoollIYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ll",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "розовая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 45,
+      "file": "bYoollIYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ll",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "розовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 46,
+      "file": "bYooPPGYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "PP",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "фиолетовая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 47,
+      "file": "bYooPPGYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "PP",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "фиолетовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 48,
+      "file": "bYooPPIYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "PP",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "фиолетовая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 49,
+      "file": "bYooPPIYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 50,
+      "file": "bYooPPIYoo-Z.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": "Z",
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 51,
+      "file": "bYoowwGYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ww",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "белая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 52,
+      "file": "bYoowwGYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ww",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "белая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 53,
+      "file": "bYoowwIYmm.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ww",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "белая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 54,
+      "file": "bYoowwIYoo.gif",
+      "sex": "female",
+      "head": "bYoo",
+      "breast": "ww",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "чёрноголовая",
+        "breast": "белая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 55,
+      "file": "RRiillGGoo.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ll",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "розовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 56,
+      "file": "RRiillGIoo-SF.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 57,
+      "file": "RRiillGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 58,
+      "file": "RRiillIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 59,
+      "file": "RRiillIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 60,
+      "file": "RRiiPPGGoo.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "PP",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "фиолетовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 61,
+      "file": "RRiiPPGIoo-pastel.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "PP",
+      "body": "GIoo",
+      "suffix": "pastel",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 62,
+      "file": "RRiiPPIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 63,
+      "file": "RRiiPPIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 64,
+      "file": "RRiiwwGGoo.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ww",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "белая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 65,
+      "file": "RRiiwwGIoo-SF.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 66,
+      "file": "RRiiwwGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 67,
+      "file": "RRiiwwIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 68,
+      "file": "RRiiwwIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRii",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 69,
+      "file": "RRoollGGmm.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 70,
+      "file": "RRoollGGoo.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 71,
+      "file": "RRoollGIoo-SF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 72,
+      "file": "RRoollGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 73,
+      "file": "RRoollIImm-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 74,
+      "file": "RRoollIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 75,
+      "file": "RRoollIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ll",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "розовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 76,
+      "file": "RRooPPGGmm.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 77,
+      "file": "RRooPPGGoo.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 78,
+      "file": "RRooPPGImm.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "GImm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "синий пастельный ОФ"
+      }
+    },
+    {
+      "index": 79,
+      "file": "RRooPPGIoo-pastel.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "GIoo",
+      "suffix": "pastel",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 80,
+      "file": "RRooPPIImm-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 81,
+      "file": "RRooPPIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 82,
+      "file": "RRooPPIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "PP",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "фиолетовая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 83,
+      "file": "RRoowwGGmm.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "GGmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "синий"
+      }
+    },
+    {
+      "index": 84,
+      "file": "RRoowwGGoo.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "GGoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "зелёный"
+      }
+    },
+    {
+      "index": 85,
+      "file": "RRoowwGIoo-SF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 86,
+      "file": "RRoowwGIoo-SF-Z.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "GIoo",
+      "suffix": "SF-Z",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "жёлтый ОФ (зелёный пастельный)"
+      }
+    },
+    {
+      "index": 87,
+      "file": "RRoowwIImm-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "IImm",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "серебристый ДФ"
+      }
+    },
+    {
+      "index": 88,
+      "file": "RRoowwIIoo-DF.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 89,
+      "file": "RRoowwIIoo-DF-Z.gif",
+      "sex": "male",
+      "head": "RRoo",
+      "breast": "ww",
+      "body": "IIoo",
+      "suffix": "DF-Z",
+      "phenotype_ru": {
+        "head": "красноголовый",
+        "breast": "белая",
+        "body": "жёлтый ДФ (золотой)"
+      }
+    },
+    {
+      "index": 90,
+      "file": "RYiillGYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "ll",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "розовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 91,
+      "file": "RYiillIYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "ll",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "розовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 92,
+      "file": "RYiiPPGYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "PP",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "фиолетовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 93,
+      "file": "RYiiPPIYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 94,
+      "file": "RYiiPPIYoo-Z.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": "Z",
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 95,
+      "file": "RYiiwwGYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "ww",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "белая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 96,
+      "file": "RYiiwwIYoo.gif",
+      "sex": "female",
+      "head": "RYii",
+      "breast": "ww",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "жёлтоголовая",
+        "breast": "белая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 97,
+      "file": "RYoollGYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ll",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "розовая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 98,
+      "file": "RYoollGYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ll",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "розовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 99,
+      "file": "RYoollIYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ll",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "розовая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 100,
+      "file": "RYoollIYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ll",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "розовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 101,
+      "file": "RYooPPGYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "PP",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "фиолетовая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 102,
+      "file": "RYooPPGYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "PP",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "фиолетовая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 103,
+      "file": "RYooPPIYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "PP",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "фиолетовая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 104,
+      "file": "RYooPPIYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 105,
+      "file": "RYooPPIYoo-Z.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "PP",
+      "body": "IYoo",
+      "suffix": "Z",
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "фиолетовая",
+        "body": "жёлтая"
+      }
+    },
+    {
+      "index": 106,
+      "file": "RYoowwGYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ww",
+      "body": "GYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "белая",
+        "body": "синяя"
+      }
+    },
+    {
+      "index": 107,
+      "file": "RYoowwGYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ww",
+      "body": "GYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "белая",
+        "body": "зелёная"
+      }
+    },
+    {
+      "index": 108,
+      "file": "RYoowwIYmm.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ww",
+      "body": "IYmm",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "белая",
+        "body": "серебристая"
+      }
+    },
+    {
+      "index": 109,
+      "file": "RYoowwIYoo.gif",
+      "sex": "female",
+      "head": "RYoo",
+      "breast": "ww",
+      "body": "IYoo",
+      "suffix": null,
+      "phenotype_ru": {
+        "head": "красноголовая",
+        "breast": "белая",
+        "body": "жёлтая"
+      }
+    }
+  ]
+}

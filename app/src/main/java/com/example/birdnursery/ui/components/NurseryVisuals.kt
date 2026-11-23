@@ -13,9 +13,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import com.example.birdnursery.data.model.hasHatched
 import kotlinx.coroutines.delay
 
 @Composable
@@ -102,100 +100,5 @@ fun FeederView(level: Float, modifier: Modifier = Modifier) {
             end = Offset(w * 0.50f, h * 0.065f),
             strokeWidth = w * 0.014f
         )
-    }
-}
-
-@Composable
-fun HatchingEggView(expectedHatchDate: Long, now: Long, modifier: Modifier = Modifier) {
-    val hatched = hasHatched(expectedHatchDate, now)
-    Canvas(modifier = modifier) {
-        val w = size.width
-        val h = size.height
-        val nestColor = Color(0xFF8B5E3C)
-        val twigColor = Color(0xFF5D4037)
-
-        repeat(7) { index ->
-            val y = h * (0.73f + index * 0.027f)
-            drawArc(
-                color = if (index % 2 == 0) nestColor else twigColor,
-                startAngle = 8f,
-                sweepAngle = 164f,
-                useCenter = false,
-                topLeft = Offset(w * (0.17f + index * 0.008f), y - h * 0.15f),
-                size = Size(w * (0.66f - index * 0.016f), h * 0.27f),
-                style = Stroke(h * 0.025f)
-            )
-        }
-
-        if (!hatched) {
-            drawOval(
-                color = Color(0xFFFFF8E8),
-                topLeft = Offset(w * 0.35f, h * 0.10f),
-                size = Size(w * 0.30f, h * 0.61f)
-            )
-            drawOval(
-                color = twigColor.copy(alpha = 0.65f),
-                topLeft = Offset(w * 0.35f, h * 0.10f),
-                size = Size(w * 0.30f, h * 0.61f),
-                style = Stroke(w * 0.009f)
-            )
-            drawOval(
-                color = Color.White.copy(alpha = 0.65f),
-                topLeft = Offset(w * 0.41f, h * 0.17f),
-                size = Size(w * 0.065f, h * 0.20f)
-            )
-            val crack = Path().apply {
-                moveTo(w * 0.50f, h * 0.35f)
-                lineTo(w * 0.455f, h * 0.405f)
-                lineTo(w * 0.52f, h * 0.445f)
-                lineTo(w * 0.465f, h * 0.51f)
-                lineTo(w * 0.535f, h * 0.55f)
-            }
-            drawPath(crack, twigColor, style = Stroke(w * 0.012f))
-        } else {
-            drawCircle(Color(0xFFF5C85B), w * 0.17f, Offset(w * 0.50f, h * 0.56f))
-            drawCircle(Color(0xFFFFD978), w * 0.145f, Offset(w * 0.52f, h * 0.32f))
-            drawOval(
-                color = Color(0xFFE5AC43),
-                topLeft = Offset(w * 0.37f, h * 0.45f),
-                size = Size(w * 0.16f, h * 0.19f)
-            )
-            drawCircle(Color(0xFF30261F), w * 0.018f, Offset(w * 0.575f, h * 0.285f))
-            drawCircle(Color.White, w * 0.006f, Offset(w * 0.568f, h * 0.275f))
-            val beak = Path().apply {
-                moveTo(w * 0.65f, h * 0.32f)
-                lineTo(w * 0.76f, h * 0.355f)
-                lineTo(w * 0.645f, h * 0.385f)
-                close()
-            }
-            drawPath(beak, Color(0xFFE58B3A))
-            drawLine(
-                Color(0xFFD87932),
-                Offset(w * 0.655f, h * 0.355f),
-                Offset(w * 0.73f, h * 0.355f),
-                w * 0.007f
-            )
-
-            val leftShell = Path().apply {
-                moveTo(w * 0.20f, h * 0.72f)
-                lineTo(w * 0.24f, h * 0.55f)
-                lineTo(w * 0.30f, h * 0.62f)
-                lineTo(w * 0.34f, h * 0.54f)
-                lineTo(w * 0.36f, h * 0.74f)
-                close()
-            }
-            val rightShell = Path().apply {
-                moveTo(w * 0.66f, h * 0.73f)
-                lineTo(w * 0.69f, h * 0.57f)
-                lineTo(w * 0.74f, h * 0.64f)
-                lineTo(w * 0.79f, h * 0.56f)
-                lineTo(w * 0.82f, h * 0.73f)
-                close()
-            }
-            drawPath(leftShell, Color(0xFFFFF8E8))
-            drawPath(leftShell, twigColor.copy(alpha = 0.55f), style = Stroke(w * 0.007f))
-            drawPath(rightShell, Color(0xFFFFF8E8))
-            drawPath(rightShell, twigColor.copy(alpha = 0.55f), style = Stroke(w * 0.007f))
-        }
     }
 }

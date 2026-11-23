@@ -2,7 +2,6 @@ package com.example.birdnursery.ui.screens.home
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
@@ -17,17 +16,11 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import com.example.birdnursery.ui.components.drawDetailedBird
+import com.example.birdnursery.ui.components.GouldianBirdImage
 import com.example.birdnursery.ui.components.rememberCurrentTime
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -196,22 +189,8 @@ private fun BirdCardItem(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Bird icon
-            Canvas(modifier = Modifier.size(68.dp)) {
-                drawDetailedBird(
-                    headColor = Color(bird.headColor),
-                    cheekColor = Color(bird.cheekColor),
-                    throatColor = Color(bird.throatColor),
-                    bodyColor = Color(bird.bodyColor),
-                    chestColor = Color(bird.chestColor),
-                    bellyColor = Color(bird.bellyColor),
-                    wingColor = Color(bird.wingColor),
-                    tailColor = Color(bird.tailColor),
-                    legColor = Color(bird.legColor),
-                    beakColor = Color(bird.beakColor),
-                    isLarge = false
-                )
-            }
+            // Bird image
+            GouldianBirdImage(bird = bird, modifier = Modifier.size(68.dp))
 
             Spacer(modifier = Modifier.width(12.dp))
 

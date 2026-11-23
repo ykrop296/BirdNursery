@@ -3,23 +3,18 @@ package com.example.birdnursery.ui.screens.addbird
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,15 +22,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.birdnursery.theme.*
 import com.example.birdnursery.data.model.Bird
-import com.example.birdnursery.ui.components.InteractiveBirdView
+import com.example.birdnursery.data.model.GouldianGenetics
+import com.example.birdnursery.ui.components.GouldianAssetImage
+import com.example.birdnursery.ui.components.GouldianBirdImage
+import com.example.birdnursery.ui.components.GouldianImageCatalog
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -50,7 +49,6 @@ fun AddBirdScreen(
     viewModel: AddBirdViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    var showColorPicker by remember { mutableStateOf<String?>(null) }
     var showParentPicker by remember { mutableStateOf<String?>(null) }
     var showChildrenPicker by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
@@ -107,7 +105,7 @@ fun AddBirdScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Interactive Bird Coloring Card
+            // Genotype coloring card
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = BeigeMedium),
@@ -117,7 +115,8 @@ fun AddBirdScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Text(
                         "🎨 Окрас птицы",
@@ -126,50 +125,39 @@ fun AddBirdScreen(
                         fontSize = 17.sp
                     )
                     Text(
-                        "Нажмите на часть птицы или кнопку внизу для выбора цвета",
+                        "Окрас задаётся генотипом, как в калькуляторе gouldianfinches.eu",
                         color = BrownMedium,
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(bottom = 12.dp)
+                        fontSize = 12.sp
                     )
 
-                    // High Quality Interactive Bird Canvas
-                    InteractiveBirdView(
-                        headColor = Color(uiState.headColor),
-                        cheekColor = Color(uiState.cheekColor),
-                        throatColor = Color(uiState.throatColor),
-                        bodyColor = Color(uiState.bodyColor),
-                        chestColor = Color(uiState.chestColor),
-                        bellyColor = Color(uiState.bellyColor),
-                        wingColor = Color(uiState.wingColor),
-                        tailColor = Color(uiState.tailColor),
-                        legColor = Color(uiState.legColor),
-                        beakColor = Color(uiState.beakColor),
-                        onPartTapped = { part -> showColorPicker = part },
+                    GouldianBirdImage(
+                        headGenotype = uiState.headGenotype,
+                        breastGenotype = uiState.breastGenotype,
+                        bodyGenotype = uiState.bodyGenotype,
+                        sexLabel = uiState.sex,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(230.dp)
+                            .height(220.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    // Quick Part Selection Chips
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        PartColorChip("Голова", Color(uiState.headColor)) { showColorPicker = "head" }
-                        PartColorChip("Щёки", Color(uiState.cheekColor)) { showColorPicker = "cheeks" }
-                        PartColorChip("Горло", Color(uiState.throatColor)) { showColorPicker = "throat" }
-                        PartColorChip("Грудь", Color(uiState.chestColor)) { showColorPicker = "chest" }
-                        PartColorChip("Живот", Color(uiState.bellyColor)) { showColorPicker = "belly" }
-                        PartColorChip("Крыло", Color(uiState.wingColor)) { showColorPicker = "wing" }
-                        PartColorChip("Спина", Color(uiState.bodyColor)) { showColorPicker = "body" }
-                        PartColorChip("Хвост", Color(uiState.tailColor)) { showColorPicker = "tail" }
-                        PartColorChip("Клюв", Color(uiState.beakColor)) { showColorPicker = "beak" }
-                        PartColorChip("Лапки", Color(uiState.legColor)) { showColorPicker = "legs" }
-                    }
+                    GenotypeDropdown(
+                        label = "Голова",
+                        options = GouldianGenetics.headOptions(uiState.sex),
+                        selected = uiState.headGenotype,
+                        onSelect = { viewModel.updateHeadGenotype(it) }
+                    )
+                    GenotypeDropdown(
+                        label = "Грудь",
+                        options = GouldianGenetics.breastOptions,
+                        selected = uiState.breastGenotype,
+                        onSelect = { viewModel.updateBreastGenotype(it) }
+                    )
+                    GenotypeDropdown(
+                        label = "Тело",
+                        options = GouldianGenetics.bodyOptions(uiState.sex),
+                        selected = uiState.bodyGenotype,
+                        onSelect = { viewModel.updateBodyGenotype(it) }
+                    )
                 }
             }
 
@@ -413,6 +401,12 @@ fun AddBirdScreen(
                         selectedName = uiState.birds.find { it.id == uiState.fatherId }?.name,
                         onClick = { showParentPicker = "father" }
                     )
+
+                    val mother = uiState.birds.find { it.id == uiState.motherId }
+                    val father = uiState.birds.find { it.id == uiState.fatherId }
+                    if (mother != null && father != null) {
+                        OffspringForecast(mother = mother, father = father)
+                    }
                     OutlinedButton(
                         onClick = { showChildrenPicker = true },
                         modifier = Modifier.fillMaxWidth(),
@@ -515,45 +509,7 @@ fun AddBirdScreen(
         }
     }
 
-    // Color picker dialog
-    showColorPicker?.let { part ->
-        ColorPickerDialogInline(
-            title = when (part) {
-                "head" -> "Цвет головы"
-                "cheeks" -> "Цвет щёк"
-                "throat" -> "Цвет горла и нагрудника"
-                "chest" -> "Цвет груди"
-                "belly" -> "Цвет живота"
-                "body" -> "Цвет спинки / тела"
-                "wing" -> "Цвет крыла"
-                "tail" -> "Цвет хвоста"
-                "legs" -> "Цвет лапок и ветки"
-                "beak" -> "Цвет клюва"
-                else -> "Выберите цвет"
-            },
-            currentColor = Color(
-                when (part) {
-                    "head" -> uiState.headColor
-                    "cheeks" -> uiState.cheekColor
-                    "throat" -> uiState.throatColor
-                    "chest" -> uiState.chestColor
-                    "belly" -> uiState.bellyColor
-                    "body" -> uiState.bodyColor
-                    "wing" -> uiState.wingColor
-                    "tail" -> uiState.tailColor
-                    "legs" -> uiState.legColor
-                    "beak" -> uiState.beakColor
-                    else -> 0
-                }
-            ),
-            onColorSelected = { color ->
-                viewModel.updatePartColor(part, color.toArgb())
-                showColorPicker = null
-            },
-            onDismiss = { showColorPicker = null }
-        )
-    }
-
+    // Parent picker dialog
     showParentPicker?.let { role ->
         val selectedId = if (role == "mother") uiState.motherId else uiState.fatherId
         val otherParentId = if (role == "mother") uiState.fatherId else uiState.motherId
@@ -729,31 +685,114 @@ private fun formatHatchDate(value: Long): String {
 }
 
 @Composable
-private fun PartColorChip(
+private fun GenotypeDropdown(
     label: String,
-    color: Color,
-    onClick: () -> Unit
+    options: List<GouldianGenetics.GenotypeOption>,
+    selected: String,
+    onSelect: (String) -> Unit
 ) {
-    Surface(
-        onClick = onClick,
-        shape = RoundedCornerShape(12.dp),
-        color = BeigeLight,
-        border = BorderStroke(1.dp, BeigeDark),
-        modifier = Modifier.height(36.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+    var expanded by remember { mutableStateOf(false) }
+    val currentLabel = options.find { it.code == selected }?.label ?: selected
+
+    Box(modifier = Modifier.fillMaxWidth()) {
+        OutlinedButton(
+            onClick = { expanded = true },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = BrownDark),
+            shape = RoundedCornerShape(12.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(16.dp)
-                    .clip(CircleShape)
-                    .background(color)
-                    .border(1.dp, BrownDark.copy(alpha = 0.5f), CircleShape)
-            )
-            Text(label, fontSize = 13.sp, color = BrownDark, fontWeight = FontWeight.Medium)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("$label: ", fontWeight = FontWeight.Medium)
+                Text(
+                    currentLabel,
+                    color = BrownMedium,
+                    modifier = Modifier.weight(1f),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Icon(Icons.Default.ArrowDropDown, contentDescription = null, tint = BrownGold)
+            }
+        }
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            containerColor = BeigeLight
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option.label, color = BrownDark) },
+                    onClick = {
+                        onSelect(option.code)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun OffspringForecast(mother: Bird, father: Bird) {
+    val context = LocalContext.current
+    val available = remember { GouldianImageCatalog.availableFiles(context.applicationContext) }
+    val predictions = remember(mother, father) {
+        GouldianGenetics.predictOffspring(
+            fatherHead = father.headGenotype,
+            fatherBreast = father.breastGenotype,
+            fatherBody = father.bodyGenotype,
+            motherHead = mother.headGenotype,
+            motherBreast = mother.breastGenotype,
+            motherBody = mother.bodyGenotype
+        )
+    }
+
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text(
+            "🧬 Возможные окрасы птенцов",
+            fontWeight = FontWeight.Bold,
+            color = BrownDark,
+            fontSize = 15.sp
+        )
+        listOf(
+            GouldianGenetics.Sex.MALE to "Самцы",
+            GouldianGenetics.Sex.FEMALE to "Самки"
+        ).forEach { (sex, title) ->
+            val rows = predictions.filter { it.sex == sex }
+            Text(title, color = BrownMedium, fontSize = 13.sp, fontWeight = FontWeight.Medium)
+            rows.take(10).forEach { prediction ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    GouldianAssetImage(
+                        file = GouldianGenetics.imageFile(
+                            prediction.head, prediction.breast, prediction.body,
+                            prediction.sex, available
+                        ),
+                        contentDescription = prediction.label,
+                        modifier = Modifier.size(40.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        prediction.label,
+                        modifier = Modifier.weight(1f),
+                        color = BrownDark,
+                        fontSize = 13.sp
+                    )
+                    Text(
+                        GouldianGenetics.formatPercent(prediction.probability),
+                        color = BrownMedium,
+                        fontSize = 13.sp
+                    )
+                }
+            }
+            if (rows.size > 10) {
+                Text(
+                    "и ещё ${rows.size - 10} вариантов",
+                    color = BrownMedium,
+                    fontSize = 12.sp
+                )
+            }
         }
     }
 }
@@ -768,85 +807,3 @@ private fun formTextFieldColors() = OutlinedTextFieldDefaults.colors(
     focusedTextColor = BrownDark,
     unfocusedTextColor = BrownDark
 )
-
-@Composable
-private fun ColorPickerDialogInline(
-    title: String,
-    currentColor: Color,
-    onColorSelected: (Color) -> Unit,
-    onDismiss: () -> Unit
-) {
-    val palette = listOf(
-        // Browns & Beiges
-        Color(0xFFFFF5E6), Color(0xFFF5E6CC), Color(0xFFD4A574), Color(0xFFC49A6C),
-        Color(0xFF8B6914), Color(0xFF7A5C3E), Color(0xFF4A3728), Color(0xFF2E1C0C),
-        // Yellows & Oranges
-        Color(0xFFFFEB3B), Color(0xFFFFC107), Color(0xFFFF9800), Color(0xFFFF5722),
-        Color(0xFFFF8A65), Color(0xFFFFD54F), Color(0xFFFFCC80), Color(0xFFFFAB91),
-        // Greens
-        Color(0xFF8BC34A), Color(0xFF4CAF50), Color(0xFF2E7D32), Color(0xFF1B5E20),
-        Color(0xFFAED581), Color(0xFF81C784), Color(0xFFC8E6C9), Color(0xFF558B2F),
-        // Blues
-        Color(0xFF03A9F4), Color(0xFF2196F3), Color(0xFF1565C0), Color(0xFF0D47A1),
-        Color(0xFF81D4FA), Color(0xFF64B5F6), Color(0xFF00BCD4), Color(0xFF0097A7),
-        // Reds & Pinks
-        Color(0xFFE91E63), Color(0xFFF44336), Color(0xFFC2185B), Color(0xFFB71C1C),
-        // Whites, Grays & Blacks
-        Color(0xFFFFFFFF), Color(0xFFE0E0E0), Color(0xFF9E9E9E), Color(0xFF424242),
-        Color(0xFF212121), Color(0xFF1A1A1A)
-    )
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        containerColor = BeigeLight,
-        title = { Text(title, color = BrownDark, fontWeight = FontWeight.Bold) },
-        text = {
-            Column {
-                Text("Выберите оттенок:", color = BrownMedium, fontSize = 13.sp)
-                Spacer(modifier = Modifier.height(12.dp))
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(5),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.height(260.dp)
-                ) {
-                    items(palette) { color ->
-                        val isSelected = color == currentColor
-                        Box(
-                            modifier = Modifier
-                                .size(44.dp)
-                                .clip(CircleShape)
-                                .background(color)
-                                .border(
-                                    width = if (isSelected) 3.dp else 1.dp,
-                                    color = if (isSelected) BrownGold else Color.Gray.copy(alpha = 0.4f),
-                                    shape = CircleShape
-                                )
-                                .clickable { onColorSelected(color) },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            if (isSelected) {
-                                Icon(
-                                    Icons.Default.Check,
-                                    contentDescription = "Выбрано",
-                                    tint = if (color.luminance() > 0.5f) Color.Black else Color.White,
-                                    modifier = Modifier.size(22.dp)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Закрыть", color = BrownGold)
-            }
-        }
-    )
-}
-
-private fun Color.luminance(): Float {
-    return 0.299f * red + 0.587f * green + 0.114f * blue
-}

@@ -1,6 +1,5 @@
 package com.example.birdnursery.ui.screens.birddetail
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -21,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountTree
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
@@ -32,6 +32,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -65,8 +66,7 @@ import com.example.birdnursery.theme.BrownMedium
 import com.example.birdnursery.theme.FeedingFed
 import com.example.birdnursery.theme.FeedingHungry
 import com.example.birdnursery.ui.components.FeederView
-import com.example.birdnursery.ui.components.HatchingEggView
-import com.example.birdnursery.ui.components.drawDetailedBird
+import com.example.birdnursery.ui.components.GouldianBirdImage
 import com.example.birdnursery.ui.components.rememberCurrentTime
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -80,6 +80,7 @@ fun BirdDetailScreen(
     onNavigateBack: () -> Unit,
     onEditBird: (Long) -> Unit,
     onBirdClick: (Long) -> Unit,
+    onShowTree: (Long) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: BirdDetailViewModel = viewModel()
 ) {
@@ -105,6 +106,9 @@ fun BirdDetailScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = { bird?.let { onShowTree(it.id) } }) {
+                        Icon(Icons.Default.AccountTree, "Дерево", tint = BrownGold)
+                    }
                     IconButton(onClick = { bird?.let { onEditBird(it.id) } }) {
                         Icon(Icons.Default.Edit, "Редактировать", tint = BrownGold)
                     }
@@ -138,26 +142,13 @@ fun BirdDetailScreen(
                     colors = CardDefaults.cardColors(containerColor = BeigeMedium),
                     elevation = CardDefaults.cardElevation(2.dp)
                 ) {
-                    Canvas(
+                    GouldianBirdImage(
+                        bird = bird,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(240.dp)
                             .padding(12.dp)
-                    ) {
-                        drawDetailedBird(
-                            headColor = Color(bird.headColor),
-                            cheekColor = Color(bird.cheekColor),
-                            throatColor = Color(bird.throatColor),
-                            bodyColor = Color(bird.bodyColor),
-                            chestColor = Color(bird.chestColor),
-                            bellyColor = Color(bird.bellyColor),
-                            wingColor = Color(bird.wingColor),
-                            tailColor = Color(bird.tailColor),
-                            legColor = Color(bird.legColor),
-                            beakColor = Color(bird.beakColor),
-                            isLarge = true
-                        )
-                    }
+                    )
                 }
 
                 bird.expectedHatchDate?.let { hatchDate ->
@@ -166,37 +157,26 @@ fun BirdDetailScreen(
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(containerColor = BeigeMedium)
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            HatchingEggView(
-                                expectedHatchDate = hatchDate,
-                                now = now,
-                                modifier = Modifier.size(width = 130.dp, height = 160.dp)
+                        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                            Text(
+                                if (hatched) "🐣 Птенец вылупился!" else "🥚 Скоро вылупление",
+                                fontWeight = FontWeight.Bold,
+                                color = BrownDark,
+                                fontSize = 18.sp
                             )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    if (hatched) "Птенец вылупился!" else "Скоро вылупление",
-                                    fontWeight = FontWeight.Bold,
-                                    color = BrownDark,
-                                    fontSize = 18.sp
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(
-                                    if (hatched) "Яйцо раскрылось, ${bird.name} уже в гнезде"
-                                    else "Осталось ${formatRemainingTime(hatchDate - now)}",
-                                    color = if (hatched) FeedingFed else BrownMedium,
-                                    fontSize = 14.sp
-                                )
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(
-                                    "Примерная дата: ${formatHatchDate(hatchDate)}",
-                                    color = BrownMedium,
-                                    fontSize = 12.sp
-                                )
-                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                if (hatched) "Яйцо раскрылось, ${bird.name} уже в гнезде"
+                                else "Осталось ${formatRemainingTime(hatchDate - now)}",
+                                color = if (hatched) FeedingFed else BrownMedium,
+                                fontSize = 14.sp
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                "Примерная дата: ${formatHatchDate(hatchDate)}",
+                                color = BrownMedium,
+                                fontSize = 12.sp
+                            )
                         }
                     }
                 }
@@ -347,6 +327,19 @@ fun BirdDetailScreen(
                                 Text("Настроить семью", color = BrownGold)
                             }
                         }
+                        OutlinedButton(
+                            onClick = { onShowTree(bird.id) },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = BrownGold)
+                        ) {
+                            Icon(
+                                Icons.Default.AccountTree,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Дерево")
+                        }
                     }
                 }
 
@@ -426,18 +419,15 @@ private fun FamilyMemberCard(
             modifier = Modifier.padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(
-                modifier = Modifier.size(42.dp).background(
-                    color = relative?.let { Color(it.headColor) } ?: BeigeMedium,
-                    shape = CircleShape
-                ),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    relative?.name?.take(1)?.uppercase() ?: "—",
-                    color = BrownDark,
-                    fontWeight = FontWeight.Bold
-                )
+            if (relative != null) {
+                GouldianBirdImage(bird = relative, modifier = Modifier.size(42.dp))
+            } else {
+                Box(
+                    modifier = Modifier.size(42.dp).background(color = BeigeMedium, shape = CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("—", color = BrownDark, fontWeight = FontWeight.Bold)
+                }
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.birdnursery.BirdNurseryApp
 import com.example.birdnursery.data.model.Bird
 import com.example.birdnursery.data.model.Cage
+import com.example.birdnursery.data.model.GouldianGenetics
 import com.example.birdnursery.data.repository.BirdRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,16 +31,9 @@ data class AddBirdUiState(
     val childIds: Set<Long> = emptySet(),
     val previousChildIds: Set<Long> = emptySet(),
     val expectedHatchDate: Long? = null,
-    val headColor: Int = Bird().headColor,
-    val cheekColor: Int = Bird().cheekColor,
-    val throatColor: Int = Bird().throatColor,
-    val bodyColor: Int = Bird().bodyColor,
-    val chestColor: Int = Bird().chestColor,
-    val bellyColor: Int = Bird().bellyColor,
-    val wingColor: Int = Bird().wingColor,
-    val tailColor: Int = Bird().tailColor,
-    val legColor: Int = Bird().legColor,
-    val beakColor: Int = Bird().beakColor,
+    val headGenotype: String = Bird().headGenotype,
+    val breastGenotype: String = Bird().breastGenotype,
+    val bodyGenotype: String = Bird().bodyGenotype,
     val cages: List<Cage> = emptyList(),
     val birds: List<Bird> = emptyList(),
     val isEditing: Boolean = false,
@@ -92,16 +86,9 @@ class AddBirdViewModel(application: Application) : AndroidViewModel(application)
                         childIds = children,
                         previousChildIds = children,
                         expectedHatchDate = bird.expectedHatchDate,
-                        headColor = bird.headColor,
-                        cheekColor = bird.cheekColor,
-                        throatColor = bird.throatColor,
-                        bodyColor = bird.bodyColor,
-                        chestColor = bird.chestColor,
-                        bellyColor = bird.bellyColor,
-                        wingColor = bird.wingColor,
-                        tailColor = bird.tailColor,
-                        legColor = bird.legColor,
-                        beakColor = bird.beakColor,
+                        headGenotype = bird.headGenotype,
+                        breastGenotype = bird.breastGenotype,
+                        bodyGenotype = bird.bodyGenotype,
                         isEditing = true,
                         editBirdId = bird.id,
                         isSaving = false,
@@ -119,7 +106,20 @@ class AddBirdViewModel(application: Application) : AndroidViewModel(application)
     fun updateBirthDate(value: String) = _uiState.update { it.copy(birthDate = value) }
     fun updateArrivalDate(value: String) = _uiState.update { it.copy(arrivalDate = value) }
     fun updateWeight(value: String) = _uiState.update { it.copy(weight = value) }
-    fun updateSex(value: String) = _uiState.update { it.copy(sex = value, errorMessage = null) }
+    fun updateSex(value: String) = _uiState.update {
+        val toFemale = GouldianGenetics.sexOf(value) == GouldianGenetics.Sex.FEMALE
+        val fromFemale = GouldianGenetics.sexOf(it.sex) == GouldianGenetics.Sex.FEMALE
+        if (toFemale == fromFemale) {
+            it.copy(sex = value, errorMessage = null)
+        } else {
+            it.copy(
+                sex = value,
+                headGenotype = GouldianGenetics.convertHeadForSex(it.headGenotype, toFemale),
+                bodyGenotype = GouldianGenetics.convertBodyForSex(it.bodyGenotype, toFemale),
+                errorMessage = null
+            )
+        }
+    }
     fun updateDiseases(value: String) = _uiState.update { it.copy(diseases = value) }
     fun updateNotes(value: String) = _uiState.update { it.copy(notes = value) }
     fun updateFeedingInterval(value: Int) = _uiState.update { it.copy(feedingIntervalHours = value) }
@@ -138,23 +138,9 @@ class AddBirdViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updatePartColor(part: String, color: Int) {
-        _uiState.update {
-            when (part) {
-                "head" -> it.copy(headColor = color)
-                "cheeks" -> it.copy(cheekColor = color)
-                "throat" -> it.copy(throatColor = color)
-                "body" -> it.copy(bodyColor = color)
-                "chest" -> it.copy(chestColor = color)
-                "belly" -> it.copy(bellyColor = color)
-                "wing" -> it.copy(wingColor = color)
-                "tail" -> it.copy(tailColor = color)
-                "legs" -> it.copy(legColor = color)
-                "beak" -> it.copy(beakColor = color)
-                else -> it
-            }
-        }
-    }
+    fun updateHeadGenotype(value: String) = _uiState.update { it.copy(headGenotype = value) }
+    fun updateBreastGenotype(value: String) = _uiState.update { it.copy(breastGenotype = value) }
+    fun updateBodyGenotype(value: String) = _uiState.update { it.copy(bodyGenotype = value) }
 
     fun saveBird(onSuccess: () -> Unit) {
         val state = _uiState.value
@@ -182,16 +168,9 @@ class AddBirdViewModel(application: Application) : AndroidViewModel(application)
                 motherId = state.motherId,
                 fatherId = state.fatherId,
                 expectedHatchDate = state.expectedHatchDate,
-                headColor = state.headColor,
-                cheekColor = state.cheekColor,
-                throatColor = state.throatColor,
-                bodyColor = state.bodyColor,
-                chestColor = state.chestColor,
-                bellyColor = state.bellyColor,
-                wingColor = state.wingColor,
-                tailColor = state.tailColor,
-                legColor = state.legColor,
-                beakColor = state.beakColor
+                headGenotype = state.headGenotype,
+                breastGenotype = state.breastGenotype,
+                bodyGenotype = state.bodyGenotype
             )
             repository.saveWithChildren(
                 bird = bird,

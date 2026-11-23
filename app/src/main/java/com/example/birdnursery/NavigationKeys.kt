@@ -14,3 +14,6 @@ data class BirdDetail(val birdId: Long) : NavKey
 
 @Serializable
 data class EditBird(val birdId: Long) : NavKey
+
+@Serializable
+data class Pedigree(val birdId: Long) : NavKey
